@@ -3,16 +3,11 @@ import ReactDOM from 'react-dom';
 import App  from './App';
 import reportWebVitals from './reportWebVitals';
 
-export default interface Iprop {
-  a: number;
-  b: number;
-  name: string;
-}
-const prop: Iprop = {a:1, b:2, name:"jonh"}
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App qwe ={prop}/>
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );
