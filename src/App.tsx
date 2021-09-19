@@ -1,8 +1,6 @@
+import React from "react";
+import { TodoContainers } from "@containers/";
 
-import { TodoContainers } from "@containers/index";
+const App = () => <TodoContainers />;
 
- const App = () =>
- <TodoContainers/>
-
-
-export default App
+export default App;
