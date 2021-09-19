@@ -1,1 +1,1 @@
-export {default as Todods} from "./Todos"
+export { default as Todods } from "./Todos";

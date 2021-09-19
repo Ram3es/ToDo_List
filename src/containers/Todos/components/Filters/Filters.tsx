@@ -1,5 +1,5 @@
 import React from "react";
 
-const Filters = () =><div>Filters</div>
+const Filters = () => <div>Filters</div>;
 
-export default Filters
+export default Filters;
