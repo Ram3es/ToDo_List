@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-
-interface ITodo {
-  id: number;
-  text: string;
-  createAt: Date;
-  completed: boolean;
-}
+import { Todo } from "@containers/";
+import React, { useContext, useEffect, useState } from "react";
+import { TodosContext, ITodoContext } from "../../../../App";
 
 const Todos = () => {
-  const [todos, setTodos] = useState<ITodo[] | undefined>();
+  const { todos } = useContext<ITodoContext>(TodosContext);
 
   return (
     <>
-      {todos?.map(({ text, id }) => (
-        <div key={id}>{text}</div>
-      ))}
+      {todos
+        ? todos?.map(({ text, id }) => (
+            <React.Fragment key={id}>
+              <Todo id={id} text={text} />
+            </React.Fragment>
+          ))
+        : "Список задач пока пуст"}
     </>
   );
 };
