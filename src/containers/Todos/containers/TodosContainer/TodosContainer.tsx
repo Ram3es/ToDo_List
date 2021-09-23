@@ -1,11 +1,17 @@
 import React from "react";
-import { Header, Todods, Filters, Footer, ITodo } from "@containers/";
+import { Header, Todods, Filters, Footer } from "@containers/";
+import { ITodo } from "../../../../App";
 
-const TodosContainer = (props: any) => {
+interface IComponentProps {
+  children?: React.ReactNode;
+  todos: ITodo[];
+}
+
+const TodosContainer = () => {
   return (
     <div>
       <Header />
-      <Todods {...props} />
+      <Todods />
       <Filters />
       <Footer />
     </div>

@@ -1,25 +1,33 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { TodoContainers, ITodo } from "@containers/";
+import { TodoContainers } from "@containers/";
+
+export interface ITodo {
+  id: number;
+  text: string;
+  createAt: Date;
+  completed: boolean;
+}
+export interface ITodoContext {
+  todos?: ITodo[];
+}
+
+export const TodosContext = React.createContext<ITodoContext>({});
 
 const App = () => {
-  const [todoList, setTodoList] = useState<ITodo[] | undefined>([]);
-  const memoData = useMemo<ITodo[]>(
-    () => [
-      {
-        id: 1,
-        text: " Todo something important",
-        createAt: new Date(),
-        completed: false,
-      },
-    ],
-    [],
+  const [todos, setTodoList] = useState<ITodo[]>([
+    {
+      id: 1,
+      text: "Todo something important",
+      createAt: new Date(),
+      completed: false,
+    },
+  ]);
+
+  return (
+    <TodosContext.Provider value={{ todos } as ITodoContext}>
+      <TodoContainers />
+    </TodosContext.Provider>
   );
-
-  useEffect(() => {
-    setTimeout(() => setTodoList((state) => state?.concat(memoData)), 2000);
-  }, [memoData]);
-
-  return <TodoContainers data={todoList} />;
 };
 
 export default App;

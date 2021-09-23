@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { ITodo } from "../../../../App";
 
 interface IState {
-  checked: boolean;
+  checked?: boolean;
   task: string;
 }
 
-const Todo = (props: any) => {
-  const [state, setState] = useState<IState>({ checked: false, task: "" });
+const Todo = ({ id, text }: Partial<ITodo>) => {
+  //   const [state, setState] = useState<IState>({ task: "" });
+
+  //  const handleChange = (e: any)=>{
+  //    console.log(e.target.value)
+  //    setState(state=>state.task=e.target.value)
+
   return (
     <div>
       <form>
-        <input type="checkbox" checked={state.checked} name="checked" />
-        <input type="text" name="task" />
+        <input name="task" value={text} />
       </form>
     </div>
   );
