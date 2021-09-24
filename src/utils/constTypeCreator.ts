@@ -1,7 +1,11 @@
-const TYPES = ["REQUEST", "SUCCESS", "FAILURE"];
+export const TYPES:string[]= ["REQUEST", "SUCCESS", "FAILURE"];
 
-export const constantsCreator = (aType: string[]) => {
-  const result: any = {};
+interface IconstCreator {
+  [key: string] :{[key: string]: string}
+}
+
+export const constantsCreator = (aType: string[]): IconstCreator=> {
+  const result: IconstCreator = {};
 
   aType.forEach((aT) => {
     result[aT] = {};

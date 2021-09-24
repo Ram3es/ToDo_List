@@ -1,6 +1,4 @@
-import { constantsCreator } from "@utils/index";
-const CONSTANTS_TYPES = ["FETCH_TODOS", "FETCH_TODO", "ADD_TODO", "REMOVE_TODO", "EDIT_TODO"];
+import { constantsCreator } from "@utils/";
+export const CONSTANTS_TYPES = ["FETCH_TODOS", "FETCH_TODO", "ADD_TODO", "REMOVE_TODO", "EDIT_TODO"];
 
-const constants = constantsCreator(CONSTANTS_TYPES);
-
-console.log(constants);
+export const constants = constantsCreator(CONSTANTS_TYPES);

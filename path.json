@@ -5,7 +5,7 @@
             "@styles/*": ["src/styles/*"],
             "@containers/*" : ["src/containers/index.ts"],
             "@shared/*":["src/shared/*"],
-            "@utils/*":["src/utils/*"]
+            "@utils/*":["src/utils/index.ts"]
         }
     }
 }
