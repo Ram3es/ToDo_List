@@ -4,7 +4,7 @@
         "paths":{
             "@styles/*": ["src/styles/*"],
             "@containers/*" : ["src/containers/index.ts"],
-            "@shared/*":["src/shared/*"],
+            "@shared/*":["src/shared/index.ts"],
             "@utils/*":["src/utils/index.ts"]
         }
     }
