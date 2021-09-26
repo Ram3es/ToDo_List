@@ -11,4 +11,4 @@ const search = createSelector([selectUsers, selectFilters], ({ users }, { search
   return users.filter((user) => Object.values(user).some((t) => t.includes(search)));
 });
 
-console.log(search)
+console.log(search);

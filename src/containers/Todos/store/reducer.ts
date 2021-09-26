@@ -41,7 +41,7 @@ export const todosReducer: IReducer = (state: ITodosState = initialState, action
     case todoConsts.ADD_TODOS.FAILURE:
     case todoConsts.EDIT_TODOS.FAILURE:
     case todoConsts.REMOVE_TODOS.FAILURE:
-        return{ ...state, loading: false, error: action.payload }
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }

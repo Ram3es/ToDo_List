@@ -2,8 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "./containers/Users/store/selectors"
-
+import "./containers/Users/store/selectors";
 
 ReactDOM.render(
   <React.StrictMode>
