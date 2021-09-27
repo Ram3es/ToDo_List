@@ -1,11 +1,10 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import axios from "axios";
 import { todosAction, todoConsts } from "@containers/";
-const URL = "https://jsonplaceholder.typicode.com"
+const URL = "https://jsonplaceholder.typicode.com";
 
 function* fetchTodosSaga({ _, cb }: ReturnType<typeof todosAction.FETCH_TODOS.REQUEST>) {
   try {
-   
     //const { todos } = yield call( axios.get("http://jsonplaceholder.typicode.com/todos")as any)
 
     const todos = [
@@ -25,7 +24,7 @@ function* fetchTodosSaga({ _, cb }: ReturnType<typeof todosAction.FETCH_TODOS.RE
 
     yield put(todosAction.FETCH_TODOS.SUCCESS(todos));
   } catch (e) {
-    console.log(e)
+    console.log(e);
     yield put(todosAction.FETCH_TODOS.FAILURE(e as Object));
   } finally {
     cb?.();
@@ -44,7 +43,7 @@ function* fetchTodoSaga({ payload, cb }: ReturnType<typeof todosAction.FETCH_TOD
     };
     yield put(todosAction.FETCH_TODO.SUCCESS(todo));
   } catch (e) {
-   yield put(todosAction.FETCH_TODO.FAILURE(e as Object));
+    yield put(todosAction.FETCH_TODO.FAILURE(e as Object));
   } finally {
     cb?.();
   }
