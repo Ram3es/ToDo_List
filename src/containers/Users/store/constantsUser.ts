@@ -5,7 +5,7 @@ export const USER_CONST: string[] = [
   "ADD_USER",
   "EDIT_USER",
   "REMOVE_USER",
-  "FILTERS_USERS",
+  "FILTERS_USER",
 ];
 
 export const userConstType = constantsCreator(USER_CONST);

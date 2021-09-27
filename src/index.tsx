@@ -1,12 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux"
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "./containers/Users/store/selectors";
+import { history, configureStore } from "./Shared/store/configStore";
+ 
+const { store } = configureStore(history)
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={ store }>
+     <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root"),
 );

@@ -27,8 +27,9 @@ function* addUserSaga({payload}: ReturnType<typeof userActions.ADD_USER.REQUEST>
     userActions.FETCH_USERS.FAILURE(e as Object);
   }
 }
-function* editUserSaga({payload:{id, ...rest}}: ReturnType<typeof userActions.EDIT_USER.REQUEST>){
+function* editUserSaga({payload}: ReturnType<typeof userActions.EDIT_USER.REQUEST>){
   try {
+    const {id , ...rest} = payload
     //const updatedUser: IUser = yield call(axios.put(`/users/${id}`, rest))
     yield put(userActions.EDIT_USER.SUCCESS())
     
@@ -45,6 +46,7 @@ function* removeUserSaga({payload}: ReturnType<typeof userActions.REMOVE_USER.RE
     userActions.FETCH_USERS.FAILURE(e as Object);
   }
 }
+function* filtersUserSaga(){}
 
 export const userSagasWatcher = function* () {
   yield takeLatest(userActions.FETCH_USERS.REQUEST, fetchUsersSaga);
@@ -52,4 +54,5 @@ export const userSagasWatcher = function* () {
   yield takeLatest(userActions.ADD_USER.REQUEST, addUserSaga)
   yield takeLatest(userActions.EDIT_USER.REQUEST, editUserSaga)
   yield takeLatest(userActions.REMOVE_USER.REQUEST, removeUserSaga)
+  yield takeLatest(userActions.FILTERS_USER.REQUEST, filtersUserSaga)
 }

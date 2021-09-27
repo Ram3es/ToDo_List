@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { TodoContainers } from "@containers/";
+import { TodoContainers, todosAction } from "@containers/";
+import { useDispatch } from "react-redux"
 
 export interface ITodo {
   id: number;
@@ -11,23 +12,20 @@ export interface ITodoContext {
   todos?: ITodo[];
 }
 
-export const TodosContext = React.createContext<ITodoContext>({});
+
 
 const App = () => {
-  const [todos, setTodoList] = useState<ITodo[]>([
-    {
-      id: 1,
-      text: "Todo something important",
-      createAt: new Date(),
-      completed: false,
-    },
-  ]);
+  const [todos, setTodoList] = useState<ITodo[]>([]);
+  const dispatch =  useDispatch()
+ 
 
-  return (
-    <TodosContext.Provider value={{ todos } as ITodoContext}>
-      <TodoContainers />
-    </TodosContext.Provider>
-  );
+  useEffect(()=>{
+    dispatch(todosAction.FETCH_TODOS.REQUEST())
+  },[])
+
+  return null 
+  //     <TodoContainers />
+  // 
 };
 
 export default App;
