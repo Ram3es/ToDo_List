@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { ITodo } from "../../../../App";
+import { ITodo } from "@containers/";
 
 interface IState {
   checked?: boolean;
   task: string;
 }
 
-const Todo = ({ id, text }: Partial<ITodo>) => {
+const Todo = ({ id, title }: Partial<ITodo>) => {
   //   const [state, setState] = useState<IState>({ task: "" });
 
   //  const handleChange = (e: any)=>{
@@ -16,7 +16,7 @@ const Todo = ({ id, text }: Partial<ITodo>) => {
   return (
     <div>
       <form>
-        <input name="task" value={text} />
+        <input name="task" value={title} />
       </form>
     </div>
   );

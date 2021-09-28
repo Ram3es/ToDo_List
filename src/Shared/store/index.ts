@@ -16,7 +16,7 @@ export const configureStore = (history: History) => {
     rootReducer(history),
     undefined,
     //@ts-ignore
-    composer(applyMiddleware(sagaMiddleware, errorHandlerMiddleware, routerMiddleware(history))),
+    composer(applyMiddleware(sagaMiddleware, routerMiddleware(history))),
   );
 
   sagaMiddleware.run(rootSagas);

@@ -1,6 +1,5 @@
 import React from "react";
-import { Header, Todods, Filters, Footer } from "@containers/";
-import { ITodo } from "../../../../App";
+import { Header, Todods, Filters, Footer, ITodo } from "@containers/";
 
 interface IComponentProps {
   children?: React.ReactNode;

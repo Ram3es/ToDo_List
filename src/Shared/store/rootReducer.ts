@@ -10,14 +10,20 @@ export default (history: History) => {
   const rootReducer = combineReducers({
     todosReducer,
     userReducer,
-    
+
     router: connectRouter(history),
     // Other reducers
   });
 
   return (state: TReducer | undefined, action: AnyAction) => {
     return rootReducer(
-      state as CombinedState<{ todosReducer: ITodosState; router: RouterState<unknown>; userReducer: IUserState }> | undefined,
+      state as
+        | CombinedState<{
+            todosReducer: ITodosState;
+            userReducer: IUserState;
+            router: RouterState<unknown>;
+          }>
+        | undefined,
       action,
     );
   };

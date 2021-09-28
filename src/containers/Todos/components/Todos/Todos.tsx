@@ -1,19 +1,16 @@
 import { Todo } from "@containers/";
 import React, { useContext, useEffect, useState } from "react";
-import { TodosContext, ITodoContext } from "../../../../App";
+import { useSelector } from "react-redux";
+import { getTodos } from "@containers/";
 
 const Todos = () => {
-  const { todos } = useContext<ITodoContext>(TodosContext);
+  const todos = useSelector(getTodos());
 
   return (
     <>
-      {todos
-        ? todos?.map(({ text, id }) => (
-            <React.Fragment key={id}>
-              <Todo id={id} text={text} />
-            </React.Fragment>
-          ))
-        : "Список задач пока пуст"}
+      {todos?.map(({ title, id }) => (
+        <div key={id}>{title}</div>
+      ))}
     </>
   );
 };

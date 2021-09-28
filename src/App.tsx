@@ -1,32 +1,21 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { TodoContainers } from "@containers/";
-
-export interface ITodo {
-  id: number;
-  text: string;
-  createAt: Date;
-  completed: boolean;
-}
-export interface ITodoContext {
-  todos?: ITodo[];
-}
-
-export const TodosContext = React.createContext<ITodoContext>({});
+import React, { useEffect } from "react";
+import { TodoContainers, todosAction, UserContainer, userActions } from "@containers/";
+import { useDispatch } from "react-redux";
 
 const App = () => {
-  const [todos, setTodoList] = useState<ITodo[]>([
-    {
-      id: 1,
-      text: "Todo something important",
-      createAt: new Date(),
-      completed: false,
-    },
-  ]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      userActions.FETCH_USERS.REQUEST(),
+    );
+  }, []);
 
   return (
-    <TodosContext.Provider value={{ todos } as ITodoContext}>
+    <>
       <TodoContainers />
-    </TodosContext.Provider>
+      <UserContainer />
+    </>
   );
 };
 
