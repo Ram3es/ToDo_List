@@ -1,8 +1,8 @@
 export interface ITodo {
   id?: number;
-  text: string;
-  createAt: Date;
-  completed: boolean;
+  title: string;
+  userId: number;
+  body: string;
 }
 export interface ITodosState {
   todos: ITodo[];

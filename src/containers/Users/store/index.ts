@@ -3,3 +3,4 @@ export * from "./actionsUers";
 export * from "./interfacesUser";
 export * from "./reducerUser";
 export * from "./sagasUser";
+export * from "./selectorsUser";

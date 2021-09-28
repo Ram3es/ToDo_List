@@ -16,8 +16,6 @@ export const todosReducer: IReducer = (state: ITodosState = initialState, action
     case todoConsts.ADD_TODO.REQUEST:
     case todoConsts.EDIT_TODO.REQUEST:
     case todoConsts.REMOVE_TODO.REQUEST:
-      console.log("sdfsdfsd");
-
       return { ...state, loading: true };
 
     case todoConsts.FETCH_TODOS.SUCCESS:

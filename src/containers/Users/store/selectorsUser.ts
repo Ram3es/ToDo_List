@@ -1,10 +1,11 @@
+import { IUserState } from "@containers/*";
 import { createSelector } from "reselect";
-import { IAppState } from "../../../shared";
+import { IAppState } from "@shared/";
 
-// const selectUsers = (state: IAppState) => state.userReducer;
+export const selectUsers = (state: IAppState) => state.userReducer;
 // const selectFilters = (state: IAppState) => state.userReducer.filterSettings;
 
-// const getUsers = createSelector(selectUsers, (state) => state.users);
+export const getUsers = createSelector(selectUsers, (state) => state.users);
 // const getFilters = createSelector(selectUsers, (state) => state.filterSettings);
 
 // const search = createSelector([selectUsers, selectFilters], ({ users }, { search }) => {

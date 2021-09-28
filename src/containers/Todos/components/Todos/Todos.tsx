@@ -8,8 +8,8 @@ const Todos = () => {
 
   return (
     <>
-      {todos?.map(({ text, id }) => (
-        <div key={id}>{text}</div>
+      {todos?.map(({ title, id }) => (
+        <div key={id}>{title}</div>
       ))}
     </>
   );

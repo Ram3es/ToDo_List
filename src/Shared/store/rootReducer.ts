@@ -9,7 +9,7 @@ type TReducer = CombinedState<IAppState>;
 export default (history: History) => {
   const rootReducer = combineReducers({
     todosReducer,
-    // userReducer,
+    userReducer,
 
     router: connectRouter(history),
     // Other reducers
@@ -20,8 +20,8 @@ export default (history: History) => {
       state as
         | CombinedState<{
             todosReducer: ITodosState;
+            userReducer: IUserState;
             router: RouterState<unknown>;
-            // userReducer: IUserState
           }>
         | undefined,
       action,

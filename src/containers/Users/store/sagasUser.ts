@@ -1,12 +1,24 @@
 import { takeLatest, call, put } from "redux-saga/effects";
-import { userActions, IUser } from "@containers/";
+import { userConstType, userActions, IUser } from "@containers/";
 import axios from "axios";
 
 function* fetchUsersSaga() {
   try {
     //const users:IUser[] = yield call(axios.get("URL"))
 
-    yield put(userActions.FETCH_USERS.SUCCESS());
+    const user = [
+      {
+        id: 3,
+        f_name: "JOHN",
+        l_name: "Travolta",
+        email: "jonnh@jonh",
+        createdAt: new Date(),
+        is_active: false,
+        avatar: null,
+      },
+    ];
+
+    yield put(userActions.FETCH_USERS.SUCCESS(user));
   } catch (e) {
     userActions.FETCH_USERS.FAILURE(e as Object);
   }
@@ -44,13 +56,11 @@ function* removeUserSaga({ payload }: ReturnType<typeof userActions.REMOVE_USER.
     userActions.FETCH_USERS.FAILURE(e as Object);
   }
 }
-function* filtersUserSaga() {}
 
 export const userSagasWatcher = function* () {
-  yield takeLatest(userActions.FETCH_USERS.REQUEST, fetchUsersSaga);
-  yield takeLatest(userActions.FETCH_USER.REQUEST, fetchUserSaga);
-  yield takeLatest(userActions.ADD_USER.REQUEST, addUserSaga);
-  yield takeLatest(userActions.EDIT_USER.REQUEST, editUserSaga);
-  yield takeLatest(userActions.REMOVE_USER.REQUEST, removeUserSaga);
-  yield takeLatest(userActions.FILTERS_USER.REQUEST, filtersUserSaga);
+  yield takeLatest(userConstType.FETCH_USERS.REQUEST, fetchUsersSaga);
+  yield takeLatest(userConstType.FETCH_USER.REQUEST, fetchUserSaga);
+  yield takeLatest(userConstType.ADD_USER.REQUEST, addUserSaga);
+  yield takeLatest(userConstType.EDIT_USER.REQUEST, editUserSaga);
+  yield takeLatest(userConstType.REMOVE_USER.REQUEST, removeUserSaga);
 };
