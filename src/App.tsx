@@ -6,9 +6,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      userActions.FETCH_USERS.REQUEST(),
-    );
+    dispatch(todosAction.FETCH_TODOS.FAILURE({error:"the giggest error"}));
   }, []);
 
   return (
