@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { ConnectedRouter } from "connected-react-router";
 import { history, configureStore } from "./shared";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -10,7 +11,9 @@ const { store } = configureStore(history);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root"),
