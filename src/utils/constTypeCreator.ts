@@ -1,4 +1,4 @@
-import { TYPES } from "../shared/constants"
+import { TYPES } from "../shared/constants";
 
 interface IconstCreator {
   [key: string]: { [key: string]: string };

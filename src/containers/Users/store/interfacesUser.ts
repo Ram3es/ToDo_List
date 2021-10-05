@@ -12,9 +12,11 @@ export enum EOrder {
   DESC = "DESC",
 }
 export interface IFilterSettings {
-  sortBy: string;
+  sortBy: keyof IUser;
   order: EOrder;
   search: string;
+  limit: number;
+  skip: number;
 }
 
 export interface IUserState {

@@ -4,7 +4,7 @@ import axios from "axios";
 
 function* fetchUsersSaga() {
   try {
-    //const users:IUser[] = yield call(axios.get("URL"))
+    // const users:IUser[] = yield call(axios.get("URL"))
 
     const user = [
       {
@@ -34,7 +34,19 @@ function* fetchUserSaga({ payload, cb }: ReturnType<typeof userActions.FETCH_USE
 function* addUserSaga({ payload }: ReturnType<typeof userActions.ADD_USER.REQUEST>) {
   try {
     //const newUser: IUser = yield call(axios.post(`/users`, payload))
-    yield put(userActions.ADD_USER.SUCCESS());
+    const newUser = [
+      {
+        id: 4,
+        f_name: "JOHN",
+        l_name: "Travolta",
+        email: "jonnh@jonh",
+        createdAt: new Date(),
+        is_active: false,
+        avatar: null,
+      },
+    ];
+
+    yield put(userActions.ADD_USER.SUCCESS(newUser));
   } catch (e) {
     userActions.FETCH_USERS.FAILURE(e as Object);
   }
@@ -43,7 +55,18 @@ function* editUserSaga({ payload }: ReturnType<typeof userActions.EDIT_USER.REQU
   try {
     const { id, ...rest } = payload;
     //const updatedUser: IUser = yield call(axios.put(`/users/${id}`, rest))
-    yield put(userActions.EDIT_USER.SUCCESS());
+    const editedUser = [
+      {
+        id: 4,
+        f_name: "JOHN",
+        l_name: "Travolta",
+        email: "jonnh@jonh",
+        createdAt: new Date(),
+        is_active: false,
+        avatar: null,
+      },
+    ];
+    yield put(userActions.EDIT_USER.SUCCESS(editedUser));
   } catch (e) {
     userActions.FETCH_USERS.FAILURE(e as Object);
   }
@@ -51,7 +74,8 @@ function* editUserSaga({ payload }: ReturnType<typeof userActions.EDIT_USER.REQU
 function* removeUserSaga({ payload }: ReturnType<typeof userActions.REMOVE_USER.REQUEST>) {
   try {
     //const removeUsersId = yield call(axios.delete(`/users/${payload.id}`))
-    yield put(userActions.REMOVE_USER.SUCCESS());
+    const removeUser = 4
+    yield put(userActions.REMOVE_USER.SUCCESS(removeUser ));
   } catch (e) {
     userActions.FETCH_USERS.FAILURE(e as Object);
   }

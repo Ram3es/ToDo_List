@@ -1,7 +1,7 @@
 import { Reducer as IReducer } from "redux";
 import { ITodosState } from "./interfaces";
 import { todoConsts } from "@containers/";
-import { ACTION_FAILURE_TYPES } from "@shared/"
+import { ACTION_FAILURE_TYPES } from "@shared/";
 
 const initialState: ITodosState = {
   todos: [],
@@ -37,7 +37,6 @@ export const todosReducer: IReducer = (state: ITodosState = initialState, action
     case todoConsts.REMOVE_TODO.SUCCESS:
       return { ...state, loading: false, todos: [...state.todos].filter((todo) => todo.id !== action.payload.id) };
 
-   
     case ACTION_FAILURE_TYPES:
       return { ...state, loading: false, error: action.payload };
     default:
