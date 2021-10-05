@@ -74,8 +74,8 @@ function* editUserSaga({ payload }: ReturnType<typeof userActions.EDIT_USER.REQU
 function* removeUserSaga({ payload }: ReturnType<typeof userActions.REMOVE_USER.REQUEST>) {
   try {
     //const removeUsersId = yield call(axios.delete(`/users/${payload.id}`))
-    const removeUser = 4
-    yield put(userActions.REMOVE_USER.SUCCESS(removeUser ));
+    const removeUser = 4;
+    yield put(userActions.REMOVE_USER.SUCCESS(removeUser));
   } catch (e) {
     userActions.FETCH_USERS.FAILURE(e as Object);
   }

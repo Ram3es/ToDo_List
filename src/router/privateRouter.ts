@@ -1,11 +1,12 @@
 import { ROUTER_PATH } from "./constants";
+import { TodoContainers } from "@containers/"
 
 export const privateRouter = (userRole: string) =>
   [
     {
       path: ROUTER_PATH.TODOS,
       exact: true,
-      component: null,
+      component: TodoContainers,
       children: [],
       icon: "",
       label: "",
