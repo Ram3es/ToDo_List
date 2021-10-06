@@ -3,21 +3,20 @@ import { Switch, Redirect } from "react-router";
 import { routerAssessor, publicRouter, privateRouter, ROUTER_PATH } from "@router/";
 import { TodoContainers, todosAction, UserContainer, userActions, authAction } from "@containers/";
 import { useDispatch } from "react-redux";
-import { Main } from "@shared/"
+import { Main } from "@shared/";
+import "./styles/index.scss";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(authAction.SIGN_IN.REQUEST());
+    dispatch(todosAction.FETCH_TODOS.REQUEST());
   }, []);
 
   return (
     <Switch>
       {publicRouter.map((route) => routerAssessor(null, route))}
-      <Main>
-        {privateRouter("ADMIN").map((route) => routerAssessor(null, route))}
-      </Main>
+      <Main>{privateRouter("ADMIN").map((route) => routerAssessor(null, route))}</Main>
       <Redirect to={ROUTER_PATH.LOGIN} />
     </Switch>
 

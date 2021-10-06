@@ -1,5 +1,6 @@
 import React from "react";
-import { Header, Todods, Filters, Footer, ITodo } from "@containers/";
+import { Header, Todods, Filters, Footer, ITodo, AddNewTodo } from "@containers/";
+import styles from "./styles.module.scss";
 
 interface IComponentProps {
   children?: React.ReactNode;
@@ -10,8 +11,11 @@ const TodosContainer = () => {
   return (
     <div>
       <Header />
-      <Todods />
-      <Filters />
+      <div className={styles.todosContainer}>
+        <AddNewTodo />
+        <Todods />
+        <Filters />
+      </div>
       <Footer />
     </div>
   );

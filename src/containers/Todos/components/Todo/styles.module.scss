@@ -1,0 +1,13 @@
+@import "../../../../styles/index.scss";
+
+.todo {
+    min-height: 58px;
+    @include font(24px,300,36px,rgba(77, 77, 77, 0.8),normal, $global-font-family);
+    border-bottom: 1px solid  rgba(77, 77, 77, 0.2);
+    display: flex;
+    align-items: center;
+    > p {
+        margin: 0;
+        padding-left: 10px;
+    }
+}

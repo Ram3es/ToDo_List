@@ -3,3 +3,4 @@ export * from "./Todos";
 export * from "./Filters";
 export * from "./Footer";
 export * from "./Todo";
+export * from "./AddNewTodo";

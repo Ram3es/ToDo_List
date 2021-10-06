@@ -1,9 +1,9 @@
 import React from "react";
-import { RequiredAuthHOC } from "@router/"
+import { RequiredAuthHOC } from "@router/";
 
 interface IMainProps {
-    children: any
+  children: any;
 }
- const Main =({children}:IMainProps)=><>{children}</>
+const Main = ({ children }: IMainProps) => <>{children}</>;
 
- export default RequiredAuthHOC(Main)
+export default RequiredAuthHOC(Main);

@@ -1,5 +1,5 @@
 import { ROUTER_PATH } from "./constants";
-import { TodoContainers } from "@containers/"
+import { TodoContainers } from "@containers/";
 
 export const privateRouter = (userRole: string) =>
   [

@@ -1,0 +1,12 @@
+@import "../../../../styles/index.scss";
+
+.addNewTodo {
+   height: 65px;
+   width: 100%;
+   display: flex;
+   align-items: center;
+   @include font(24px,300,36px,rgba(191, 191, 191, 1),normal, $global-font-family);
+   padding-left: 10px;
+   border-bottom: 1px solid  rgba(77, 77, 77, 0.2); 
+   box-sizing: border-box;
+}

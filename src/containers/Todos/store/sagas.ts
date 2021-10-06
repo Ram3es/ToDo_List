@@ -8,7 +8,7 @@ const api = axios.create({
 
 function* fetchTodosSaga({ _, cb }: ReturnType<typeof todosAction.FETCH_TODOS.REQUEST>) {
   try {
-    const { data }: { data: ITodo[] } = yield call(() => api.get("/posts"));
+    const { data }: { data: ITodo[] } = yield call(() => api.get("/posts?_limit=30 "));
 
     yield put(todosAction.FETCH_TODOS.SUCCESS(data));
   } catch (e) {
