@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { Switch, Redirect } from "react-router";
 import { routerAssessor, publicRouter, privateRouter, ROUTER_PATH } from "@router/";
-import { TodoContainers, todosAction, UserContainer, userActions, authAction } from "@containers/";
+import { TodoContainers, todosAction, UserContainer, userActions, authAction, testServiceThunk } from "@containers/";
 import { useDispatch } from "react-redux";
+import { push } from "connected-react-router";
 import { Main } from "@shared/";
 import "./styles/index.scss";
 
@@ -10,7 +11,8 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(todosAction.FETCH_TODOS.REQUEST());
+    dispatch(todosAction.FETCH_TODOS.REQUEST(testServiceThunk));
+    dispatch(push(ROUTER_PATH.TODOS));
   }, []);
 
   return (
