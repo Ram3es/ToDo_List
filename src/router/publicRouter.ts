@@ -1,4 +1,4 @@
-import { Login } from "@containers/";
+import { Login, Registration } from "@containers/";
 import { ROUTER_PATH } from "./constants";
 export const publicRouter = [
   {
@@ -12,7 +12,7 @@ export const publicRouter = [
   {
     path: ROUTER_PATH.REGISTRATION,
     exact: true,
-    component: null,
+    component: Registration,
     children: [],
     icon: "",
     label: "",

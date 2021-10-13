@@ -2,7 +2,7 @@ export interface ITodo {
   id?: number;
   title: string;
   userId: number;
-  body: string;
+  completed: boolean;
 }
 export interface ITodosState {
   todos: ITodo[];

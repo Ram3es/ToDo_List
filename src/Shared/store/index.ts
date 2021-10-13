@@ -8,7 +8,7 @@ import createSagaMiddleware from "redux-saga";
 import { errorMiddlewearHandler } from "@shared/";
 import thunk from "redux-thunk";
 
-// const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware();
 const composer = composeWithDevTools({ trace: true, traceLimit: 25 });
 export const history = createBrowserHistory();
 
@@ -17,17 +17,10 @@ export const configureStore = (history: History) => {
     rootReducer(history),
     undefined,
 
-    composer(
-      applyMiddleware(
-        // sagaMiddleware,
-        thunk,
-        errorMiddlewearHandler,
-        routerMiddleware(history),
-      ),
-    ),
+    composer(applyMiddleware(sagaMiddleware, errorMiddlewearHandler, routerMiddleware(history))),
   );
 
-  // sagaMiddleware.run(rootSagas);
+  sagaMiddleware.run(rootSagas);
 
   return { store };
 };

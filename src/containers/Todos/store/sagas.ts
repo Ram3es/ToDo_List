@@ -10,7 +10,7 @@ function* fetchTodosSaga({ _, cb }: ReturnType<typeof todosAction.FETCH_TODOS.RE
   try {
     const { data }: { data: ITodo[] } = yield call(() => api.get("/posts?_limit=30 "));
 
-    yield put(todosAction.FETCH_TODOS.SUCCESS(data));
+    yield put(todosAction.FETCH_TODOS.SUCCESS());
   } catch (e) {
     yield put(todosAction.FETCH_TODOS.FAILURE(e as Object));
   } finally {
@@ -32,7 +32,7 @@ function* addTodoSaga({ payload, cb }: ReturnType<typeof todosAction.ADD_TODO.RE
   try {
     const { data }: { data: ITodo } = yield call(() => api.post(`/posts`, payload));
 
-    yield put(todosAction.ADD_TODO.SUCCESS(data));
+    yield put(todosAction.ADD_TODO.SUCCESS(payload));
   } catch (err) {
     yield put(todosAction.ADD_TODO.FAILURE(err as Object));
   } finally {
@@ -43,9 +43,10 @@ function* editTodoSaga({ payload, cb }: ReturnType<typeof todosAction.EDIT_TODO.
   try {
     const { id, ...rest } = payload;
 
-    const { data }: { data: ITodo } = yield call(() => api.put(`/todos/${id}`, rest));
+    //const { data }: { data: ITodo } = yield call(() => api.put(`/todos/${id}`, rest));
+    console.log(payload, "edit success");
 
-    yield put(todosAction.EDIT_TODO.SUCCESS(data));
+    yield put(todosAction.EDIT_TODO.SUCCESS(payload));
   } catch (err) {
     yield put(todosAction.EDIT_TODO.FAILURE(err as Object));
   } finally {
@@ -55,8 +56,8 @@ function* editTodoSaga({ payload, cb }: ReturnType<typeof todosAction.EDIT_TODO.
 function* removeTodoSaga({ payload, cb }: ReturnType<typeof todosAction.REMOVE_TODO.REQUEST>) {
   try {
     const id: {} = yield call(() => api.delete(`/todos/${payload.id}`));
-
-    yield put(todosAction.REMOVE_TODO.SUCCESS(id));
+    console.log(payload);
+    yield put(todosAction.REMOVE_TODO.SUCCESS(payload));
   } catch (err) {
     yield put(todosAction.REMOVE_TODO.FAILURE(err as Object));
   } finally {

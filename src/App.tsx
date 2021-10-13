@@ -11,8 +11,8 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(todosAction.FETCH_TODOS.REQUEST(testServiceThunk));
-    dispatch(push(ROUTER_PATH.TODOS));
+    //dispatch(todosAction.FETCH_TODOS.REQUEST());
+    //dispatch(push(ROUTER_PATH.LOGIN));
   }, []);
 
   return (

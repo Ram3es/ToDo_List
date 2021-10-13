@@ -7,7 +7,7 @@ import styles from "./styles.module.scss";
 const Todos = () => {
   const todos = useSelector(getTodos());
   const renderTodos = useMemo(() => {
-    return todos?.map(({ title, id }) => <Todo key={id} title={title} />);
+    return todos?.map((todo) => <Todo key={todo.id} {...todo} />);
   }, [todos]);
 
   return <div className={styles.todos}>{renderTodos}</div>;

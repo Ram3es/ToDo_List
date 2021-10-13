@@ -35,7 +35,7 @@ export const todosReducer: IReducer = (state: ITodosState = initialState, action
         todos: [...state.todos].map((todo) => (todo.id === action.payload.id ? action.payload : todo)),
       };
     case todoConsts.REMOVE_TODO.SUCCESS:
-      return { ...state, loading: false, todos: [...state.todos].filter((todo) => todo.id !== action.payload.id) };
+      return { ...state, loading: false, todos: [...state.todos].filter((todo) => todo.id !== action.payload) };
 
     case ACTION_FAILURE_TYPES:
       return { ...state, loading: false, error: action.payload };
