@@ -1,3 +1,7 @@
+export interface ITodosFilterSettings {
+  completed: null | boolean;
+}
+
 export interface ITodo {
   id?: number;
   title: string;
@@ -9,4 +13,5 @@ export interface ITodosState {
   error: null | string;
   loading: boolean;
   todo: ITodo | null;
+  filterSettings: ITodosFilterSettings;
 }

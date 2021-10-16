@@ -1,21 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { push } from "connected-react-router";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { FORMS } from "@containers/";
+import { FORMS, authAction } from "@containers/";
+import { ROUTER_PATH } from "@router/";
 import styles from "./styles.module.scss";
 import * as Yup from "yup";
-import { TextField } from "@material-ui/core";
-
+interface ISubmitValues {
+  [key: string]: string;
+}
 const Login = () => {
-  const handleSubmit: any = (values: string, props: any) => {
-    console.log(values);
+  const dispatch = useDispatch();
 
-    props.setSubmitting(false);
+  const handleSubmit = (values: ISubmitValues, { setSubmitting }: any) => {
+    dispatch(authAction.SIGN_IN.REQUEST(values));
+    setSubmitting(false);
   };
 
   return (
     <div className={styles.login}>
       <h1>LOGIN</h1>
-      <Formik onSubmit={handleSubmit} initialValues={FORMS.SIGN_IN.INIT} validationSchema={FORMS.SIGN_IN.SHEME} onB>
+      <Formik onSubmit={handleSubmit} initialValues={FORMS.SIGN_IN.INIT} validationSchema={FORMS.SIGN_IN.SHEME}>
         {(props) => {
           return (
             <Form>
@@ -23,20 +28,11 @@ const Login = () => {
               <br />
               <Field type="email" name="email" />
               <ErrorMessage name="email" /> <br />
-              {/* <label>Password</label><br/>
-           <Field type="password" name="password" />
-           <ErrorMessage name="password"  /> */}
-              <TextField
-                id="outlined-password-input"
-                label="Password"
-                name="password"
-                type="password"
-                value={props.values.password}
-                onChange={props.handleChange}
-              />
-              <button type="submit" disabled={props.isSubmitting}>
-                Submit
-              </button>
+              <label>Password</label>
+              <br />
+              <Field type="password" name="password" />
+              <ErrorMessage name="password" />
+              <button type="submit"> Submit</button>
             </Form>
           );
         }}

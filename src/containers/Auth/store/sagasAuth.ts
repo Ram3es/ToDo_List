@@ -10,8 +10,11 @@ function* signInSaga({ payload, cb }: ReturnType<typeof authAction.SIGN_IN.REQUE
     //const { token } //= yield call(()=> axios.post(URL,payload))
     // const { user} = jwt.verify(token, 'shhhhh', function(err, decoded) {
     //   return decoded.user}
+    console.log(payload, "sagas");
+    const token = "wfhwkjhf33333ihehfhege33333HSDJHGFJFJS";
+    localStorage.setItem("token", token);
 
-    yield put(authAction.SIGN_IN.SUCCESS());
+    yield put(authAction.SIGN_IN.SUCCESS({ token }));
   } catch (e) {
     yield put(authAction.SIGN_IN.FAILURE(e as Object));
   } finally {

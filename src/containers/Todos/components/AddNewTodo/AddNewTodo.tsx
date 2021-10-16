@@ -1,7 +1,11 @@
 import React, { KeyboardEventHandler, ReactEventHandler, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { useDispatch } from "react-redux";
-import { todosAction } from "@containers/";
+import { todosAction, ITodo } from "@containers/";
+
+interface IAddNewTodo extends ITodo {
+  onClose: Function;
+}
 
 const AddNewTodo = (props: any) => {
   const [value, setValue] = useState<string>("");
@@ -25,7 +29,7 @@ const AddNewTodo = (props: any) => {
               ...props,
               title: value,
             },
-            props?.onClose(),
+            props.onClose(),
           ),
         );
       } else {
@@ -34,7 +38,7 @@ const AddNewTodo = (props: any) => {
             id: new Date().getTime(),
             title: value,
             userId: 1,
-            completed: true,
+            completed: false,
           }),
         );
         setValue("");

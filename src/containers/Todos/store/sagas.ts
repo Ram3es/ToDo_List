@@ -44,7 +44,6 @@ function* editTodoSaga({ payload, cb }: ReturnType<typeof todosAction.EDIT_TODO.
     const { id, ...rest } = payload;
 
     //const { data }: { data: ITodo } = yield call(() => api.put(`/todos/${id}`, rest));
-    console.log(payload, "edit success");
 
     yield put(todosAction.EDIT_TODO.SUCCESS(payload));
   } catch (err) {
@@ -56,7 +55,6 @@ function* editTodoSaga({ payload, cb }: ReturnType<typeof todosAction.EDIT_TODO.
 function* removeTodoSaga({ payload, cb }: ReturnType<typeof todosAction.REMOVE_TODO.REQUEST>) {
   try {
     const id: {} = yield call(() => api.delete(`/todos/${payload.id}`));
-    console.log(payload);
     yield put(todosAction.REMOVE_TODO.SUCCESS(payload));
   } catch (err) {
     yield put(todosAction.REMOVE_TODO.FAILURE(err as Object));

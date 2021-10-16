@@ -1,11 +1,11 @@
 import { Todo } from "@containers/";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { getTodos } from "@containers/";
+import { getTodos, getFilteredTodos } from "@containers/";
 import styles from "./styles.module.scss";
 
 const Todos = () => {
-  const todos = useSelector(getTodos());
+  const todos = useSelector(getFilteredTodos());
   const renderTodos = useMemo(() => {
     return todos?.map((todo) => <Todo key={todo.id} {...todo} />);
   }, [todos]);

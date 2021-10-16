@@ -1,13 +1,17 @@
 import { Reducer as IReducer } from "redux";
 import { ITodosState } from "./interfaces";
-import { todoConsts } from "@containers/";
+import { ITodo, todoConsts } from "@containers/";
 import { ACTION_FAILURE_TYPES } from "@shared/";
+import { StateObservable } from "redux-observable";
 
 const initialState: ITodosState = {
   todos: [],
   error: null,
   loading: false,
   todo: null,
+  filterSettings: {
+    completed: null,
+  },
 };
 
 export const todosReducer: IReducer = (state: ITodosState = initialState, action) => {
@@ -35,10 +39,19 @@ export const todosReducer: IReducer = (state: ITodosState = initialState, action
         todos: [...state.todos].map((todo) => (todo.id === action.payload.id ? action.payload : todo)),
       };
     case todoConsts.REMOVE_TODO.SUCCESS:
-      return { ...state, loading: false, todos: [...state.todos].filter((todo) => todo.id !== action.payload) };
+      let newTodos: ITodo[] = [];
+      if (Array.isArray(action.payload)) {
+        newTodos = [...state.todos].filter((todo) => action.payload.includes(todo.id));
+      } else {
+        newTodos = [...state.todos].filter((todo) => todo.id !== action.payload);
+      }
+      return { ...state, loading: false, todos: newTodos };
 
     case ACTION_FAILURE_TYPES:
       return { ...state, loading: false, error: action.payload };
+    case todoConsts.APPLY_TODOS_FILTER.REQUEST:
+      console.log(action.payload);
+      return { ...state, filterSettings: { ...state.filterSettings, ...action.payload } };
     default:
       return state;
   }
