@@ -9,7 +9,7 @@ const initialState: IAuthState = {
   authUser: null,
 };
 
-export const authReducer: Reducer = (state = initialState, action) => {
+export const authReducer: Reducer<IAuthState> = (state: IAuthState = initialState, action) => {
   switch (action.type) {
     case authConstants.SIGN_IN.REQUEST:
     case authConstants.SIGN_UP.REQUEST:
@@ -23,6 +23,8 @@ export const authReducer: Reducer = (state = initialState, action) => {
         error: null,
       };
     case authConstants.SIGN_IN.SUCCESS:
+    case authConstants.ACCOUNT_ACTIVATION.SUCCESS:
+    case authConstants.RESET_PASSWORD.SUCCESS:
       return {
         ...state,
         loading: false,
@@ -30,6 +32,10 @@ export const authReducer: Reducer = (state = initialState, action) => {
         token: action.payload.token,
         authUser: action.payload.user,
       };
+    case authConstants.FORGOT_PASSWORD.SUCCESS:
+    case authConstants.SIGN_UP.SUCCESS:
+      return { ...state, loader: false };
+
     case authConstants.SIGN_OUT.SUCCESS: {
       return initialState;
     }

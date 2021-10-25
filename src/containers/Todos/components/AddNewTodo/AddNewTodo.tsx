@@ -11,6 +11,9 @@ const AddNewTodo = (props: any) => {
   const [value, setValue] = useState<string>("");
   const dispatch = useDispatch();
 
+  console.log(props, "+++++++++++++++++");
+  
+
   useEffect(() => {
     if (props.id) {
       setValue(props.title);
@@ -35,9 +38,8 @@ const AddNewTodo = (props: any) => {
       } else {
         dispatch(
           todosAction.ADD_TODO.REQUEST({
-            id: new Date().getTime(),
+            created_by: "Admin",
             title: value,
-            userId: 1,
             completed: false,
           }),
         );

@@ -11,7 +11,6 @@ const Filters = () => {
     dispatch(todosAction.APPLY_TODOS_FILTER.REQUEST({ completed: value }));
   };
   const removeComletedHandler = () => {
-    console.log(CompletedTodos);
     dispatch(todosAction.REMOVE_TODO.SUCCESS(CompletedTodos.map((t) => t.id)));
   };
   return (

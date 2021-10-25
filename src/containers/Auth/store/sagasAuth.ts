@@ -1,6 +1,8 @@
 import { takeLatest, call, put } from "redux-saga/effects";
-import { authConstants, authAction } from "@containers/";
+import { authConstants, authAction, } from "@containers/";
 import axios from "axios";
+import { push } from "connected-react-router";
+import { ROUTER_PATH } from "@router/"
 import jwt from "jsonwebtoken";
 import { decodedTextSpanIntersectsWith } from "typescript";
 
@@ -10,11 +12,21 @@ function* signInSaga({ payload, cb }: ReturnType<typeof authAction.SIGN_IN.REQUE
     //const { token } //= yield call(()=> axios.post(URL,payload))
     // const { user} = jwt.verify(token, 'shhhhh', function(err, decoded) {
     //   return decoded.user}
-    console.log(payload, "sagas");
     const token = "wfhwkjhf33333ihehfhege33333HSDJHGFJFJS";
+    const user = {
+      id: 1,
+      f_name: "John",
+      l_name: "Smith",
+      email: "qwe@qwer.com",
+      createdAt: new Date(),
+      is_active: true,
+      avatar: "",
+    };
     localStorage.setItem("token", token);
 
-    yield put(authAction.SIGN_IN.SUCCESS({ token }));
+     yield put(authAction.SIGN_IN.SUCCESS({ token, user }));
+    //  yield put(push(ROUTER_PATH.TODOS))
+     console.log(payload)
   } catch (e) {
     yield put(authAction.SIGN_IN.FAILURE(e as Object));
   } finally {
@@ -32,9 +44,11 @@ function* signUpSaga({ payload, cb }: ReturnType<typeof authAction.SIGN_UP.REQUE
   }
 }
 function* resetPasswordSaga({ payload, cb }: ReturnType<typeof authAction.RESET_PASSWORD.REQUEST>) {
-  try {
+  try { 
+    // payload = password, confirmPassword, email
     //  yield call(()=> axios.post(URL, payload))
     yield put(authAction.RESET_PASSWORD.SUCCESS());
+    yield put (authAction.SIGN_IN.REQUEST({email:"", password:""}))
   } catch (e) {
     yield put(authAction.RESET_PASSWORD.FAILURE(e as Object));
   } finally {
@@ -43,6 +57,7 @@ function* resetPasswordSaga({ payload, cb }: ReturnType<typeof authAction.RESET_
 }
 function* forgotPasswordSaga({ payload, cb }: ReturnType<typeof authAction.FORGOT_PASSWORD.REQUEST>) {
   try {
+     // payload = email
     yield call(() => axios.post("", payload));
     yield put(authAction.FORGOT_PASSWORD.SUCCESS());
   } catch (e) {
@@ -54,8 +69,11 @@ function* forgotPasswordSaga({ payload, cb }: ReturnType<typeof authAction.FORGO
 
 function* accountActivationdSaga({ payload, cb }: ReturnType<typeof authAction.ACCOUNT_ACTIVATION.REQUEST>) {
   try {
+    const {firstName, lastName, password, email,  confirmPassword} = payload
     yield call(() => axios.post("", payload));
+    yield put (authAction.SIGN_IN.REQUEST({email, password}))
   } catch (e) {
+    yield put(authAction.ACCOUNT_ACTIVATION.FAILURE(e as Object));
   } finally {
     cb?.();
   }

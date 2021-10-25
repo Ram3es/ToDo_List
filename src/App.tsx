@@ -20,9 +20,9 @@ const App = () => {
   const isAuth = useSelector(getFlagAuth());
 
   useEffect(() => {
-    //dispatch(todosAction.FETCH_TODOS.REQUEST());
+    dispatch(todosAction.FETCH_TODOS.REQUEST());
 
-    if (isAuth) {
+    if (true) {
       dispatch(push(ROUTER_PATH.TODOS));
     } else {
       dispatch(push(ROUTER_PATH.LOGIN));

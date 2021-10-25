@@ -1,21 +1,31 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FORMS, authAction } from "@containers/";
-import { ROUTER_PATH } from "@router/";
+import { ROUTER_PATH } from "../../../../router/constants";
+
 import styles from "./styles.module.scss";
-import * as Yup from "yup";
-interface ISubmitValues {
+
+export interface ISubmitValues {
   [key: string]: string;
 }
-const Login = () => {
+export const Login = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values: ISubmitValues, { setSubmitting }: any) => {
     dispatch(authAction.SIGN_IN.REQUEST(values));
     setSubmitting(false);
   };
+  const clickHandler = (e: any) =>{
+    e.preventDefault()
+    e.stopPropagation()
+    console.log(ROUTER_PATH);
+    
+    dispatch(push(ROUTER_PATH.REGISTRATION))
+
+  }
 
   return (
     <div className={styles.login}>
@@ -32,13 +42,24 @@ const Login = () => {
               <br />
               <Field type="password" name="password" />
               <ErrorMessage name="password" />
-              <button type="submit"> Submit</button>
+              <button type="submit" disabled={props.isSubmitting}>
+                Submit
+              </button>
+              <br />
+              <button type="button" onClick={clickHandler}>Go to Registration</button>
             </Form>
           );
         }}
       </Formik>
+       
     </div>
   );
 };
 
-export default Login;
+{
+  /* <div className={styles.action}>
+                <Link to={ROUTER_PATH.REGISTRATION }>
+                Registration
+              </Link>
+              </div> */
+}

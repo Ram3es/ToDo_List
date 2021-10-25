@@ -3,14 +3,13 @@ import { todosAction, todoConsts, ITodo } from "@containers/";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com",
+  baseURL: "http://localhost:8000/api/todos",
 });
 
 function* fetchTodosSaga({ _, cb }: ReturnType<typeof todosAction.FETCH_TODOS.REQUEST>) {
   try {
-    const { data }: { data: ITodo[] } = yield call(() => api.get("/posts?_limit=30 "));
-
-    yield put(todosAction.FETCH_TODOS.SUCCESS());
+    const { data }: { data: ITodo[] } = yield call(() => api.get(""));
+    yield put(todosAction.FETCH_TODOS.SUCCESS(data));
   } catch (e) {
     yield put(todosAction.FETCH_TODOS.FAILURE(e as Object));
   } finally {
@@ -18,9 +17,9 @@ function* fetchTodosSaga({ _, cb }: ReturnType<typeof todosAction.FETCH_TODOS.RE
   }
 }
 function* fetchTodoSaga({ payload, cb }: ReturnType<typeof todosAction.FETCH_TODO.REQUEST>) {
+  
   try {
-    const { data }: { data: ITodo } = yield call(() => api.get(`/posts/${payload.id}`));
-
+    const { data }: { data: ITodo } = yield call(() => api.get(`/${payload}`));
     yield put(todosAction.FETCH_TODO.SUCCESS(data));
   } catch (e) {
     yield put(todosAction.FETCH_TODO.FAILURE(e as Object));
@@ -30,9 +29,8 @@ function* fetchTodoSaga({ payload, cb }: ReturnType<typeof todosAction.FETCH_TOD
 }
 function* addTodoSaga({ payload, cb }: ReturnType<typeof todosAction.ADD_TODO.REQUEST>) {
   try {
-    const { data }: { data: ITodo } = yield call(() => api.post(`/posts`, payload));
-
-    yield put(todosAction.ADD_TODO.SUCCESS(payload));
+    const { data }: { data: ITodo } = yield call(() => api.post(``, payload));
+    yield put(todosAction.ADD_TODO.SUCCESS(data));
   } catch (err) {
     yield put(todosAction.ADD_TODO.FAILURE(err as Object));
   } finally {
@@ -42,10 +40,8 @@ function* addTodoSaga({ payload, cb }: ReturnType<typeof todosAction.ADD_TODO.RE
 function* editTodoSaga({ payload, cb }: ReturnType<typeof todosAction.EDIT_TODO.REQUEST>) {
   try {
     const { id, ...rest } = payload;
-
-    //const { data }: { data: ITodo } = yield call(() => api.put(`/todos/${id}`, rest));
-
-    yield put(todosAction.EDIT_TODO.SUCCESS(payload));
+    const { data }: { data: ITodo } = yield call(() => api.put(`/${id}`, rest));
+    yield put(todosAction.EDIT_TODO.SUCCESS(data));
   } catch (err) {
     yield put(todosAction.EDIT_TODO.FAILURE(err as Object));
   } finally {
@@ -53,9 +49,10 @@ function* editTodoSaga({ payload, cb }: ReturnType<typeof todosAction.EDIT_TODO.
   }
 }
 function* removeTodoSaga({ payload, cb }: ReturnType<typeof todosAction.REMOVE_TODO.REQUEST>) {
+ 
   try {
-    const id: {} = yield call(() => api.delete(`/todos/${payload.id}`));
-    yield put(todosAction.REMOVE_TODO.SUCCESS(payload));
+    const { data }: { data: ITodo[] } = yield call(() => api.delete(`/${payload}`))
+    yield put(todosAction.REMOVE_TODO.SUCCESS(data));
   } catch (err) {
     yield put(todosAction.REMOVE_TODO.FAILURE(err as Object));
   } finally {

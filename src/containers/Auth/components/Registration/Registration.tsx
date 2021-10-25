@@ -1,58 +1,31 @@
 import React, { useState } from "react";
-import { Formik, Form, FieldArray, Field } from "formik";
-import { AnySchema } from "yup";
+import { useDispatch } from "react-redux";
+import { Formik, Form, FieldArray, Field, ErrorMessage } from "formik";
+import { FORMS, authAction, ISubmitValues } from "@containers/";
+import styles from "./styles.module.scss";
 
 const Registration = () => {
+  const dispatch = useDispatch();
+
+  const handlerSubmit = (value: ISubmitValues) => {
+    dispatch(authAction.SIGN_UP.REQUEST(value));
+  };
   return (
-    <div>
-      <h1>Friend List</h1>
-      <Formik
-        initialValues={{ friends: ["jared", "ian", "brent"] }}
-        onSubmit={(values: any): any =>
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-          }, 500)
-        }
-        render={({ values }) => (
-          <Form>
-            <FieldArray
-              name="friends"
-              render={(arrayHelpers) => (
-                <div>
-                  {values.friends && values.friends.length > 0 ? (
-                    values.friends.map((friend, index) => (
-                      <div key={index}>
-                        <Field name={`friends.${index}`} />
-                        <button
-                          type="button"
-                          onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
-                        >
-                          -
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => arrayHelpers.insert(index, "")} // insert an empty string at a position
-                        >
-                          +
-                        </button>
-                      </div>
-                    ))
-                  ) : (
-                    <button type="button" onClick={() => arrayHelpers.push("")}>
-                      {/* show this when user has removed all friends from the list */}
-                      Add a friend
-                    </button>
-                  )}
-                  <div>
-                    <button type="submit">Submit</button>
-                  </div>
-                </div>
-              )}
-            />
-          </Form>
-        )}
-      />
-    </div>
+    <Formik onSubmit={handlerSubmit} initialValues={FORMS.SIGN_UP.INIT} validationSchema={FORMS.SIGN_UP.SHEME}>
+      {({ errors, touched }) => {
+        return (
+          <div className={styles.based}>
+            <h1>Registration</h1>
+            <Form>
+              <label>Email</label> <br />
+              <Field type="email" name="email" />
+              {touched.email && Boolean(errors.email) && errors.email} <br />
+              <button type="submit"> Send</button>
+            </Form>
+          </div>
+        );
+      }}
+    </Formik>
   );
 };
 export default Registration;
