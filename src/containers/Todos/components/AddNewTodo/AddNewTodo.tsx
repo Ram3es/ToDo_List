@@ -11,9 +11,6 @@ const AddNewTodo = (props: any) => {
   const [value, setValue] = useState<string>("");
   const dispatch = useDispatch();
 
-  console.log(props, "+++++++++++++++++");
-  
-
   useEffect(() => {
     if (props.id) {
       setValue(props.title);

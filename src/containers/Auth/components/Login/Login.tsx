@@ -18,14 +18,13 @@ export const Login = () => {
     dispatch(authAction.SIGN_IN.REQUEST(values));
     setSubmitting(false);
   };
-  const clickHandler = (e: any) =>{
-    e.preventDefault()
-    e.stopPropagation()
+  const clickHandler = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
     console.log(ROUTER_PATH);
-    
-    dispatch(push(ROUTER_PATH.REGISTRATION))
 
-  }
+    dispatch(push(ROUTER_PATH.REGISTRATION));
+  };
 
   return (
     <div className={styles.login}>
@@ -46,12 +45,13 @@ export const Login = () => {
                 Submit
               </button>
               <br />
-              <button type="button" onClick={clickHandler}>Go to Registration</button>
+              <button type="button" onClick={clickHandler}>
+                Go to Registration
+              </button>
             </Form>
           );
         }}
       </Formik>
-       
     </div>
   );
 };

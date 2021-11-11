@@ -1,27 +1,26 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Formik, Form, FieldArray, Field, ErrorMessage } from "formik";
-import { FORMS, authAction, ISubmitValues } from "@containers/";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { FORMS, authAction } from "@containers/";
 import styles from "./styles.module.scss";
-
-const Registration = () => {
+const ForgotPassword = () => {
   const dispatch = useDispatch();
-
-  const handlerSubmit = (value: ISubmitValues) => {
+  const handlerSubmit = (value: any) => {
     console.log(value, "registrayion");
 
-    dispatch(authAction.SIGN_UP.REQUEST(value));
+    dispatch(authAction.FORGOT_PASSWORD.REQUEST(value));
   };
+
   return (
-    <Formik onSubmit={handlerSubmit} initialValues={FORMS.SIGN_UP.INIT} validationSchema={FORMS.SIGN_UP.SHEME}>
+    <Formik onSubmit={handlerSubmit} initialValues={FORMS.FORGOT.INIT} validationSchema={FORMS.FORGOT.SHEME}>
       {({ errors, touched }) => {
         return (
           <div className={styles.based}>
-            <h1>Registration</h1>
+            <h1>Forgot Password</h1>
             <Form>
               <label>Email</label> <br />
               <Field type="email" name="email" />
-              {touched.email && Boolean(errors.email) && errors.email} <br />
+              <ErrorMessage name="email" />
               <button type="submit"> Send</button>
             </Form>
           </div>
@@ -30,4 +29,5 @@ const Registration = () => {
     </Formik>
   );
 };
-export default Registration;
+
+export default ForgotPassword;

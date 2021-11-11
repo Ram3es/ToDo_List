@@ -13,8 +13,8 @@ export const errorMiddlewearHandler = (data: { getState: () => IAppState; dispat
     const onlyFailureTypes = Object.values(commonConstType).map((type) => type.FAILURE);
 
     if (onlyFailureTypes.includes(action.type)) {
-      console.log(type, "middleware");
       dispatch({ type: ACTION_FAILURE_TYPES, payload });
+      console.log(payload, " log middleware");
     }
     return next(action);
   };

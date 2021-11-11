@@ -21,6 +21,7 @@ export interface IFilterSettings {
 
 export interface IUserState {
   loading: boolean;
+  error: string | null;
   users: IUser[];
   user: IUser | null;
   filterSettings: IFilterSettings;

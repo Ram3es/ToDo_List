@@ -4,12 +4,16 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FORMS, authAction, ISubmitValues } from "@containers/";
 import { ROUTER_PATH } from "@router/";
 import styles from "./styles.module.scss";
+import { useLocation } from "react-router";
 
 const Activation = () => {
+  const { search } = useLocation();
   const dispatch = useDispatch();
 
   const handleSubmitActivation = (value: ISubmitValues) => {
-    dispatch(authAction.ACCOUNT_ACTIVATION.REQUEST(value));
+    console.log(search, "location serach");
+
+    dispatch(authAction.ACCOUNT_ACTIVATION.REQUEST({ ...value, token: search }));
   };
 
   return (
@@ -24,12 +28,12 @@ const Activation = () => {
           <Form>
             <label>First Name</label>
             <br />
-            <Field type="text" name="firstName" />
-            <ErrorMessage name="firstName" /> <br />
+            <Field type="text" name="first_name" />
+            <ErrorMessage name="first_name" /> <br />
             <label>Last Name</label>
             <br />
-            <Field type="text" name="lastName" />
-            <ErrorMessage name="lastName" />
+            <Field type="text" name="last_name" />
+            <ErrorMessage name="last_name" />
             <br />
             <label>Password</label>
             <br />

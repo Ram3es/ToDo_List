@@ -2,53 +2,33 @@ import { takeLatest, call, put } from "redux-saga/effects";
 import { userConstType, userActions, IUser } from "@containers/";
 import axios from "axios";
 
-function* fetchUsersSaga() {
+const api = axios.create({
+  baseURL: "http://localhost:8000/api/users",
+});
+
+function* fetchUsersSaga({ payload, cb }: ReturnType<typeof userActions.FETCH_USERS.REQUEST>) {
   try {
-    // const users:IUser[] = yield call(axios.get("URL"))
-
-    const user = [
-      {
-        id: 3,
-        f_name: "JOHN",
-        l_name: "Travolta",
-        email: "jonnh@jonh",
-        createdAt: new Date(),
-        is_active: false,
-        avatar: null,
-      },
-    ];
-
-    yield put(userActions.FETCH_USERS.SUCCESS(user));
+    const { data }: { data: IUser[] } = yield call(() => api.get(""));
+    yield put(userActions.FETCH_USERS.SUCCESS(data));
   } catch (e) {
-    userActions.FETCH_USERS.FAILURE(e as Object);
+    yield put(userActions.FETCH_USERS.FAILURE(e as Object));
   }
 }
 function* fetchUserSaga({ payload, cb }: ReturnType<typeof userActions.FETCH_USER.REQUEST>) {
   try {
-    //const user:IUser = yield call(axios.get(`/users/${payload.id}`))
-    yield put(userActions.FETCH_USER.SUCCESS());
+    const { data }: { data: IUser } = yield call(() => api.get(`/${payload}`));
+    yield put(userActions.FETCH_USER.SUCCESS(data));
   } catch (e) {
-    userActions.FETCH_USERS.FAILURE(e as Object);
+    yield put(userActions.FETCH_USER.FAILURE(e as Object));
   }
 }
 function* addUserSaga({ payload }: ReturnType<typeof userActions.ADD_USER.REQUEST>) {
   try {
-    //const newUser: IUser = yield call(axios.post(`/users`, payload))
-    const newUser = [
-      {
-        id: 4,
-        f_name: "JOHN",
-        l_name: "Travolta",
-        email: "jonnh@jonh",
-        createdAt: new Date(),
-        is_active: false,
-        avatar: null,
-      },
-    ];
+    const { data }: { data: IUser } = yield call(() => api.post(``, payload));
 
-    yield put(userActions.ADD_USER.SUCCESS(newUser));
+    yield put(userActions.ADD_USER.SUCCESS(data));
   } catch (e) {
-    userActions.FETCH_USERS.FAILURE(e as Object);
+    yield put(userActions.ADD_USER.FAILURE(e as Object));
   }
 }
 function* editUserSaga({ payload }: ReturnType<typeof userActions.EDIT_USER.REQUEST>) {

@@ -8,7 +8,7 @@ const api = axios.create({
 
 function* fetchTodosSaga({ _, cb }: ReturnType<typeof todosAction.FETCH_TODOS.REQUEST>) {
   try {
-    const { data }: { data: ITodo[] } = yield call(() => api.get(""));
+    const { data }: { data: ITodo[] } = yield call(() => api.get("/"));
     yield put(todosAction.FETCH_TODOS.SUCCESS(data));
   } catch (e) {
     yield put(todosAction.FETCH_TODOS.FAILURE(e as Object));
@@ -17,7 +17,6 @@ function* fetchTodosSaga({ _, cb }: ReturnType<typeof todosAction.FETCH_TODOS.RE
   }
 }
 function* fetchTodoSaga({ payload, cb }: ReturnType<typeof todosAction.FETCH_TODO.REQUEST>) {
-  
   try {
     const { data }: { data: ITodo } = yield call(() => api.get(`/${payload}`));
     yield put(todosAction.FETCH_TODO.SUCCESS(data));
@@ -29,7 +28,7 @@ function* fetchTodoSaga({ payload, cb }: ReturnType<typeof todosAction.FETCH_TOD
 }
 function* addTodoSaga({ payload, cb }: ReturnType<typeof todosAction.ADD_TODO.REQUEST>) {
   try {
-    const { data }: { data: ITodo } = yield call(() => api.post(``, payload));
+    const { data }: { data: ITodo } = yield call(() => api.post(`/`, payload));
     yield put(todosAction.ADD_TODO.SUCCESS(data));
   } catch (err) {
     yield put(todosAction.ADD_TODO.FAILURE(err as Object));
@@ -49,9 +48,8 @@ function* editTodoSaga({ payload, cb }: ReturnType<typeof todosAction.EDIT_TODO.
   }
 }
 function* removeTodoSaga({ payload, cb }: ReturnType<typeof todosAction.REMOVE_TODO.REQUEST>) {
- 
   try {
-    const { data }: { data: ITodo[] } = yield call(() => api.delete(`/${payload}`))
+    const { data }: { data: ITodo[] } = yield call(() => api.delete(`/${payload}`));
     yield put(todosAction.REMOVE_TODO.SUCCESS(data));
   } catch (err) {
     yield put(todosAction.REMOVE_TODO.FAILURE(err as Object));

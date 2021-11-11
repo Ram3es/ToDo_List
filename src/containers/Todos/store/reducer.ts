@@ -2,7 +2,6 @@ import { Reducer as IReducer } from "redux";
 import { ITodosState } from "./interfaces";
 import { ITodo, todoConsts } from "@containers/";
 import { ACTION_FAILURE_TYPES } from "@shared/";
-import { StateObservable } from "redux-observable";
 
 const initialState: ITodosState = {
   todos: [],

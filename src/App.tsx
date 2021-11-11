@@ -14,20 +14,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { Main } from "@shared/";
 import "./styles/index.scss";
+import socketIOClient from "socket.io-client";
 
 const App = () => {
+  // useEffect(() => {
+  //   const socket = socketIOClient('http://192.168.3.180:8003', { transports: ['websocket', 'polling', 'flashsocket'] });
+  //   document.addEventListener("click", () =>  socket.emit("msg_from_roman"," hello Artem"))
+  //   socket.on("message", data => {
+  //     console.log('Message from BE', data)
+  //   });
+
+  // }, []);
   const dispatch = useDispatch();
   const isAuth = useSelector(getFlagAuth());
 
-  useEffect(() => {
-    dispatch(todosAction.FETCH_TODOS.REQUEST());
-
-    if (true) {
-      dispatch(push(ROUTER_PATH.TODOS));
-    } else {
-      dispatch(push(ROUTER_PATH.LOGIN));
-    }
-  }, [isAuth]);
+  //   if (true) {
+  //     dispatch(push(ROUTER_PATH.TODOS));
+  //   } else {
+  //     dispatch(push(ROUTER_PATH.LOGIN));
+  //   }
+  // }, [isAuth]);
 
   return (
     <Switch>

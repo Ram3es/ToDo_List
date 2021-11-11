@@ -20,14 +20,22 @@ export const FORMS = {
   },
   ACTIVATION: {
     INIT: {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       password: "",
     },
     SCHEMA: Yup.object().shape({
-      firstName: Yup.string().min(3).required("This field is required"),
-      lastName: Yup.string().min(3).required("This field is required"),
+      first_name: Yup.string().min(3).required("This field is required"),
+      last_name: Yup.string().min(3).required("This field is required"),
       password: Yup.string().min(8).required("This field is required"),
+    }),
+  },
+  FORGOT: {
+    INIT: {
+      email: "",
+    },
+    SHEME: Yup.object().shape({
+      email: Yup.string().email("Invalid email").required("Field is requiered !"),
     }),
   },
 };

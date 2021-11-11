@@ -5,6 +5,7 @@ const initialState: IUserState = {
   loading: false,
   users: [],
   user: null,
+  error: null,
   filterSettings: {
     sortBy: "createdAt",
     order: EOrder.ASC,
@@ -40,9 +41,11 @@ export const userReducer: IReducer = (state = initialState, action) => {
       return { ...state, loading: false, users: [...state.users].filter((user) => user.id !== action.payload.id) };
     case userConstType.USER_FILTERS.REQUEST:
       return { ...state, loading: false, filterSettings: action.payload };
-    case userConstType.FETCH_USERS.FAILURE: {
+    case userConstType.FETCH_USERS.FAILURE:
+    case userConstType.FETCH_USER.FAILURE:
+    case userConstType.ADD_USER.FAILURE:
       return { ...state, loading: false, error: action.payload };
-    }
+
     default:
       return state;
   }

@@ -1,41 +1,37 @@
 import { takeLatest, call, put } from "redux-saga/effects";
-import { authConstants, authAction, } from "@containers/";
+import { authConstants, authAction } from "@containers/";
+import { IUser } from "@containers/";
 import axios from "axios";
 import { push } from "connected-react-router";
-import { ROUTER_PATH } from "@router/"
 import jwt from "jsonwebtoken";
 import { decodedTextSpanIntersectsWith } from "typescript";
+import { ROUTER_PATH } from "../../../router/constants";
+import { authAPI } from "../../../router/constants";
+import { shh } from "@shared/";
 
 function* signInSaga({ payload, cb }: ReturnType<typeof authAction.SIGN_IN.REQUEST>) {
   try {
-    // const { email, password } = payload
-    //const { token } //= yield call(()=> axios.post(URL,payload))
-    // const { user} = jwt.verify(token, 'shhhhh', function(err, decoded) {
-    //   return decoded.user}
-    const token = "wfhwkjhf33333ihehfhege33333HSDJHGFJFJS";
-    const user = {
-      id: 1,
-      f_name: "John",
-      l_name: "Smith",
-      email: "qwe@qwer.com",
-      createdAt: new Date(),
-      is_active: true,
-      avatar: "",
-    };
-    localStorage.setItem("token", token);
+    const { data } = yield call(() => authAPI.post("/login", payload));
+    //@ts-ignore
+    const user = yield jwt.verify(data, shh, function (err, decoded) {
+      if (err) {
+        throw err;
+      }
+      return decoded;
+    });
+    localStorage.setItem("token", data);
 
-     yield put(authAction.SIGN_IN.SUCCESS({ token, user }));
-    //  yield put(push(ROUTER_PATH.TODOS))
-     console.log(payload)
+    yield put(authAction.SIGN_IN.SUCCESS({ data, user: user.data }));
+    yield put(push(ROUTER_PATH.TODOS));
   } catch (e) {
-    yield put(authAction.SIGN_IN.FAILURE(e as Object));
+    yield put(authAction.SIGN_IN.FAILURE(e as string));
   } finally {
     cb?.();
   }
 }
 function* signUpSaga({ payload, cb }: ReturnType<typeof authAction.SIGN_UP.REQUEST>) {
   try {
-    // yield call (() => axios.post(URL, payload))
+    yield call(() => authAPI.post("/", payload));
     yield put(authAction.SIGN_UP.SUCCESS());
   } catch (e) {
     yield put(authAction.SIGN_UP.FAILURE(e as Object));
@@ -44,11 +40,11 @@ function* signUpSaga({ payload, cb }: ReturnType<typeof authAction.SIGN_UP.REQUE
   }
 }
 function* resetPasswordSaga({ payload, cb }: ReturnType<typeof authAction.RESET_PASSWORD.REQUEST>) {
-  try { 
+  try {
     // payload = password, confirmPassword, email
     //  yield call(()=> axios.post(URL, payload))
     yield put(authAction.RESET_PASSWORD.SUCCESS());
-    yield put (authAction.SIGN_IN.REQUEST({email:"", password:""}))
+    yield put(authAction.SIGN_IN.REQUEST({ email: "", password: "" }));
   } catch (e) {
     yield put(authAction.RESET_PASSWORD.FAILURE(e as Object));
   } finally {
@@ -57,8 +53,7 @@ function* resetPasswordSaga({ payload, cb }: ReturnType<typeof authAction.RESET_
 }
 function* forgotPasswordSaga({ payload, cb }: ReturnType<typeof authAction.FORGOT_PASSWORD.REQUEST>) {
   try {
-     // payload = email
-    yield call(() => axios.post("", payload));
+    yield call(() => authAPI.put("/forgot-password", payload));
     yield put(authAction.FORGOT_PASSWORD.SUCCESS());
   } catch (e) {
     yield put(authAction.FORGOT_PASSWORD.FAILURE(e as Object));
@@ -69,9 +64,12 @@ function* forgotPasswordSaga({ payload, cb }: ReturnType<typeof authAction.FORGO
 
 function* accountActivationdSaga({ payload, cb }: ReturnType<typeof authAction.ACCOUNT_ACTIVATION.REQUEST>) {
   try {
-    const {firstName, lastName, password, email,  confirmPassword} = payload
-    yield call(() => axios.post("", payload));
-    yield put (authAction.SIGN_IN.REQUEST({email, password}))
+    //const {first_name, last_name, password, email,  confirmPassword, token} = payload
+    const { token, ...rest } = payload;
+    const {
+      data: { email, password },
+    } = yield call(() => authAPI.post(`/account-activation${token}`, rest));
+    yield put(push(ROUTER_PATH.TODOS));
   } catch (e) {
     yield put(authAction.ACCOUNT_ACTIVATION.FAILURE(e as Object));
   } finally {
