@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import { history, configureStore } from "./shared";
 import App from "./App";
+import "semantic-ui-css/semantic.min.css";
 import reportWebVitals from "./reportWebVitals";
 
 const { store } = configureStore(history);

@@ -38,4 +38,22 @@ export const FORMS = {
       email: Yup.string().email("Invalid email").required("Field is requiered !"),
     }),
   },
+  RESET: {
+    INIT: {
+      password: "",
+      confirmPass: "",
+    },
+    SCHEMA: Yup.object().shape({
+      password: Yup.string().min(4).required("Field is requiered !"),
+      confirmPass: Yup.string()
+        .min(4)
+        .when("password", (password, schema) => {
+          return schema.test({
+            test: (confirmPass: string) => confirmPass === password,
+            message: "Password don`t match",
+          });
+        })
+        .required("Field is requiered !"),
+    }),
+  },
 };

@@ -21,7 +21,7 @@ const Todo = (props: ITodo) => {
   ) : (
     <div className={styles.todo}>
       <input type="checkbox" id={id?.toString()} checked={completed} onChange={onChangeHandler} />
-      <label onDoubleClick={doubleClickHandler}>{title}</label> {/*htmlFor={id?.toString()}*/}
+      <label onDoubleClick={doubleClickHandler}>{title}</label> {/*={id?.toString()}*/}
       <button onClick={removeButtonHandler}> Remove</button>
     </div>
   );

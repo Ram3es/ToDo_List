@@ -11,8 +11,13 @@
 }
 .actions {
     display: "flex";
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: center;
-    align-items: center;
-    
+    align-items: center; 
 }
+.actionsItem{
+    display: "flex";
+   flex-direction: row;
+    margin: "5px";
+    
+  }
