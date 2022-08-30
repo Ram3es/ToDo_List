@@ -1,0 +1,4 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "json.maxItemsComputed": 50000
+}

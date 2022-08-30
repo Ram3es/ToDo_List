@@ -1,0 +1,5 @@
+@import "../../../../styles/index.scss";
+
+.header {
+    @include font(100px,normal,124px,rgba(175, 47, 47, 0.15),normal, $global-font-family)
+}
