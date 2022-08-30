@@ -2,6 +2,7 @@ import React, { KeyboardEventHandler, ReactEventHandler, useEffect, useState } f
 import styles from "./styles.module.scss";
 import { useDispatch } from "react-redux";
 import { todosAction, ITodo } from "@containers/";
+import { Input } from 'semantic-ui-react'
 
 interface IAddNewTodo extends ITodo {
   onClose: Function;
@@ -52,6 +53,7 @@ const AddNewTodo = (props: any) => {
         type="text"
         placeholder="What needs to be done?"
         value={value}
+       className={styles.input}
       />
     </div>
   );

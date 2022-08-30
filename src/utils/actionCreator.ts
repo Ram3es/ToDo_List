@@ -1,6 +1,7 @@
 import { AnyAction } from "redux";
 import { TYPES } from "../shared/constants";
 
+
 interface IActionCreator {
   [key: string]: { [key: string]: (payload?: Object, cb?: () => void, options?: Object) => AnyAction };
 }

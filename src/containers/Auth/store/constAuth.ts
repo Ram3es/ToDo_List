@@ -1,4 +1,5 @@
 import { constantsCreator } from "@utils/";
+import { createActionTypes} from "react-redux-jedi"
 export const CONSTANTS_TYPES_AUTH = [
   "SIGN_IN",
   "SIGN_UP",
@@ -8,4 +9,4 @@ export const CONSTANTS_TYPES_AUTH = [
   "SIGN_OUT",
 ];
 
-export const authConstants = constantsCreator(CONSTANTS_TYPES_AUTH);
+export const authConstants = createActionTypes(CONSTANTS_TYPES_AUTH);

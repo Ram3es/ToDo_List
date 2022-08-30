@@ -25,27 +25,13 @@ const App = () => {
   //   });
 
   // }, []);
-  const dispatch = useDispatch();
-  const isAuth = useSelector(getFlagAuth());
-
-  //   if (true) {
-  //     dispatch(push(ROUTER_PATH.TODOS));
-  //   } else {
-  //     dispatch(push(ROUTER_PATH.LOGIN));
-  //   }
-  // }, [isAuth]);
-
+ 
   return (
     <Switch>
       {publicRouter.map((route) => routerAssessor(null, route))}
-      {/* <Main>{privateRouter("ADMIN").map((route) => routerAssessor(null, route))}</Main> */}
-      {/* <Redirect to={ROUTER_PATH.LOGIN} /> */}
+      <Main>{privateRouter("ADMIN").map((route) => routerAssessor(null, route))}</Main>
+      <Redirect to={ROUTER_PATH.LOGIN} />
     </Switch>
-
-    // <>
-    //   <TodoContainers />
-    //   <UserContainer />
-    // </>
   );
 };
 

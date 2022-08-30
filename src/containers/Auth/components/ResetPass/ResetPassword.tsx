@@ -5,13 +5,15 @@ import { Link } from "react-router-dom";
 import { FORMS, authAction } from "@containers/";
 import { ROUTER_PATH } from "../../../../router/constants";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router";
 
 const ResetPassword = () => {
+  const { search } = useLocation()
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
 
-  const handleSubmit = (values: any) => {
-    dispatch(authAction.SIGN_IN.REQUEST(values));
+  const handleSubmit = ( { password }: any) => {
+    dispatch(authAction.RESET_PASSWORD.REQUEST({password, search}));
   };
 
   return (

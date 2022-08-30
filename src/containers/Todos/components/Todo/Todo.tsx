@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ITodo, todosAction, AddNewTodo } from "@containers/";
 import { useDispatch } from "react-redux";
 import styles from "./styles.module.scss";
+import { Button } from "semantic-ui-react"
 
 const Todo = (props: ITodo) => {
   const dispatch = useDispatch();
@@ -20,9 +21,11 @@ const Todo = (props: ITodo) => {
     <AddNewTodo onClose={() => setIsEditMode(false)} {...props} />
   ) : (
     <div className={styles.todo}>
-      <input type="checkbox" id={id?.toString()} checked={completed} onChange={onChangeHandler} />
-      <label onDoubleClick={doubleClickHandler}>{title}</label> {/*={id?.toString()}*/}
-      <button onClick={removeButtonHandler}> Remove</button>
+      <div>
+      <input className={styles.checkbox} type="checkbox" id={id?.toString()} checked={completed} onChange={onChangeHandler} />
+      <label  className={styles.label} onDoubleClick={doubleClickHandler}>{title}</label> {/*={id?.toString()}*/}
+      </div>
+      <Button style={{margin:"0 10px 0 0"}} content='Remove' primary onClick={removeButtonHandler} />
     </div>
   );
 };

@@ -12,6 +12,8 @@ const Registration = () => {
 
   const handlerSubmit = (value: ISubmitValues) => {
     dispatch(authAction.SIGN_UP.REQUEST(value));
+    console.log(value);
+    
   };
   return (
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">

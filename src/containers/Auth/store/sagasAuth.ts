@@ -40,9 +40,12 @@ function* signUpSaga({ payload, cb }: ReturnType<typeof authAction.SIGN_UP.REQUE
   }
 }
 function* resetPasswordSaga({ payload, cb }: ReturnType<typeof authAction.RESET_PASSWORD.REQUEST>) {
+  console.log(payload.confirmPass);
+  
+  const {  search , ...rest } = payload
   try {
     // payload = password, confirmPassword, email
-    //  yield call(()=> axios.post(URL, payload))
+    yield call(()=> authAPI.post(`/reset-password${search}`,rest ))
     yield put(authAction.RESET_PASSWORD.SUCCESS());
     yield put(authAction.SIGN_IN.REQUEST({ email: "", password: "" }));
   } catch (e) {

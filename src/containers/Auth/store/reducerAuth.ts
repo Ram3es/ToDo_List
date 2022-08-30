@@ -4,7 +4,7 @@ import { IAuthState, authConstants } from "@containers/";
 const initialState: IAuthState = {
   error: null,
   loading: false,
-  isAuthintification: false,
+  isAuthintification: true,
   token: null,
   authUser: null,
 };
