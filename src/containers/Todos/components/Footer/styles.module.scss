@@ -1,0 +1,13 @@
+@import "../../../../styles/index.scss";
+
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    @include font(14px,300,24px,rgba(191, 191, 191, 1),normal, $global-font-family);
+
+    > p {
+        margin: 0;
+    }
+
+
+}

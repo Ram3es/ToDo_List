@@ -1,0 +1,23 @@
+
+.login {
+    width: 550px;
+    background-color: white;
+    height: auto;
+    
+     > h1 {
+         text-align: center;
+     }
+   
+}
+.actions {
+    display: "flex";
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center; 
+}
+.actionsItem{
+    display: "flex";
+   flex-direction: row;
+    margin: "5px";
+    
+  }
